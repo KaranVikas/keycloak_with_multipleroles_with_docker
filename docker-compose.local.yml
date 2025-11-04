@@ -1,0 +1,49 @@
+volumes:
+  keycloak_with_multiroles_docker_local_postgres_data: {}
+  keycloak_with_multiroles_docker_local_postgres_data_backups: {}
+
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: keycloak_with_multiroles_docker_local_django
+    container_name: keycloak_with_multiroles_docker_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - /app/.venv
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - '8000:8000'
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: keycloak_with_multiroles_docker_production_postgres
+    container_name: keycloak_with_multiroles_docker_local_postgres
+    volumes:
+      - keycloak_with_multiroles_docker_local_postgres_data:/var/lib/postgresql/data
+      - keycloak_with_multiroles_docker_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: keycloak_with_multiroles_docker_local_keycloak
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+    command: start-dev --import-realm
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./compose/local/keycloak/realm-export:/opt/keycloak/data/import
+
+

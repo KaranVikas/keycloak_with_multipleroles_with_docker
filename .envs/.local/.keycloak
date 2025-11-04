@@ -1,0 +1,6 @@
+# Keycloak environment variables for local development
+# Loaded by docker-compose.local.yml into the keycloak service
+
+# Admin user to access Keycloak console at http://localhost:8080
+KEYCLOAK_ADMIN=admin
+KEYCLOAK_ADMIN_PASSWORD=admin

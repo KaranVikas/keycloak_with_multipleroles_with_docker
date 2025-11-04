@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=keycloak_with_multiroles_docker
+POSTGRES_USER=HxXClVkcUAHynsrbnoaPCrFEOizAKhnG
+POSTGRES_PASSWORD=sDd1viEhOdQEIFUd97lWAXUQaK8RM2q20q8LKguLyY9pFRGUw890EH4iEibcWuLi

@@ -1,0 +1,17 @@
+services:
+  docs:
+    image: keycloak_with_multiroles_docker_local_docs
+    container_name: keycloak_with_multiroles_docker_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - /app/.venv
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./keycloak_with_multiroles_docker:/app/keycloak_with_multiroles_docker:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
