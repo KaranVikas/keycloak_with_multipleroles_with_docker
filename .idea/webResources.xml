@@ -2,10 +2,12 @@
 <project version="4">
   <component name="WebResourcesPaths">
     <contentEntries>
-      <entry url="file://$PROJECT_DIR$">
+      <entry url="file://$PROJECT_DIR$/..">
         <entryData>
           <resourceRoots>
-            <path value="file://$PROJECT_DIR$/keycloak_with_multiroles_docker/static" />
+            <path value="file://$PROJECT_DIR$/locale" />
+            <path value="file://$PROJECT_DIR$/docs" />
+            <path value="file://$PROJECT_DIR$/config" />
           </resourceRoots>
         </entryData>
       </entry>

@@ -8,9 +8,17 @@ from .api.views import (
   AllUsersView,
   UserDetailView
 )
+from .views import TokenValidationView
 
 app_name = "users"
 urlpatterns = [
+
+  #   Keycloak Endpoints
+
+    path('auth/keycloak/config', KeycloakConfigView.as_view(), name='keycloak_config'),
+    path('auth/validate/' ,TokenValidationView.as_view(), name='keycloak_token_validate'),
+
+  #   Existing endpoints
   path('register/', RegisterView.as_view(), name='register'),
   path('login/', LoginView.as_view(), name='login'),
   path('logout/', LogoutView.as_view(), name='logout'),

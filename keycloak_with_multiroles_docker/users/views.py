@@ -7,40 +7,33 @@ from django.views.generic import DetailView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
 
-from keycloak_with_multiroles_docker.users.models import User
+
+class KeycloakConfigView(APIView):
+  """
+      Endpoint to provide keycloak configuration to frontend
+  """
+  permission_classes = [AllowAny]
+
+  def get(self, request):
+    return Response({
+      'serverUrl': settings.KEYCLOAK_SERVER_URL,
+      'realm': settings.KEYCLOAK_REALM,
+      'clientId': settings.KEYCLOAK_CLIENT_ID,
+    }, status=status.HTTP_200_OK
+    )
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
-    model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
+class TokenValidationView(APIView):
+  """
+  Endpoint to validate token and return user info
+  Frontend can call this after getting token from keycloak
+  """
 
+  permission_classes = [IsAuthenticated]
 
-user_detail_view = UserDetailView.as_view()
-
-
-class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = User
-    fields = ["name"]
-    success_message = _("Information successfully updated")
-
-    def get_success_url(self) -> str:
-        assert self.request.user.is_authenticated  # type guard
-        return self.request.user.get_absolute_url()
-
-    def get_object(self, queryset: QuerySet | None=None) -> User:
-        assert self.request.user.is_authenticated  # type guard
-        return self.request.user
-
-
-user_update_view = UserUpdateView.as_view()
-
-
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-    permanent = False
-
-    def get_redirect_url(self) -> str:
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
-
-user_redirect_view = UserRedirectView.as_view()
+  def get(self, request):
+    from keycloak_with_multiroles_docker.users.api.serializers import UserSerializer
+    return Response({
+      'valid': True,
+      'user': UserSerializer(request.user).data
+    }, status=status.HTTP_200_OK)
