@@ -71,6 +71,7 @@ DJANGO_APPS = [
   "django.forms",
 ]
 THIRD_PARTY_APPS = [
+  "corsheaders",
   "crispy_forms",
   "crispy_bootstrap5",
   "allauth",
@@ -79,7 +80,6 @@ THIRD_PARTY_APPS = [
   "allauth.socialaccount",
   "rest_framework",
   "rest_framework.authtoken",
-  "corsheaders",
   "drf_spectacular",
 ]
 
@@ -131,6 +131,39 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Explicitly allow these methods
+CORS_ALLOW_METHODS = [
+  "DELETE",
+  "GET",
+  "OPTIONS",
+  "PATCH",
+  "POST",
+  "PUT",
+]
+
+# Explicitly allow these headers
+CORS_ALLOW_HEADERS = [
+  "accept",
+  "accept-encoding",
+  "authorization",
+  "content-type",
+  "dnt",
+  "origin",
+  "user-agent",
+  "x-csrftoken",
+  "x-requested-with",
+]
+
+# Allow preflight requests to be cached for 1 hour
+CORS_PREFLIGHT_MAX_AGE = 3600
+
+# Enable verbose logging for CORS
+import logging
+
+logging.getLogger('corsheaders').setLevel(logging.DEBUG)
+
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
@@ -146,7 +179,6 @@ MIDDLEWARE = [
   "django.middleware.clickjacking.XFrameOptionsMiddleware",
   "allauth.account.middleware.AccountMiddleware",
 ]
-CORS_ALLOW_ALL_ORIGINS = True
 
 # STATIC
 # ------------------------------------------------------------------------------
@@ -316,9 +348,9 @@ SPECTACULAR_SETTINGS = {
 # Keycloak Configuration
 # ------------------------------------------------------------------------------
 KEYCLOAK_REALM = env.str("KEYCLOAK_REALM", default="education-app")
-KEYCLOAK_SERVER = env.str("KEYCLOAK_SERVER", default="http://localhost:8080")
-KEYCLOAK_CLIENT_ID = env.str("KEYCLOAK_CLIENT_ID", default="education-app")
-KEYCLOAK_CLIENT_SECRET = env.str("KEYCLOAK_CLIENT_SECRET", default="gww4yDV7J8EDwGKcjENGocuqnpfp2IbE")
+KEYCLOAK_SERVER = env.str("KEYCLOAK_SERVER", default="http://keycloak:8080")
+KEYCLOAK_CLIENT_ID = env.str("KEYCLOAK_CLIENT_ID", default="django-education-app")
+KEYCLOAK_CLIENT_SECRET = env.str("KEYCLOAK_CLIENT_SECRET", default="OGXg6wysFDPGEpuhUSnbNI9Bu2TuxMp1")
 KEYCLOAK_LEEWAY = env.int("KEYCLOAK_LEEWAY", default=60)
 KEYCLOAK_AUDIENCE = env.str("KEYCLOAK_AUDIENCE", default="todo")
 

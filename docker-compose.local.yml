@@ -1,6 +1,7 @@
 volumes:
-  keycloak_with_multiroles_docker_local_postgres_data: {}
-  keycloak_with_multiroles_docker_local_postgres_data_backups: {}
+  keycloak_with_multiroles_docker_local_postgres_data: { }
+  keycloak_with_multiroles_docker_local_postgres_data_backups: { }
+  keycloak_data: { }
 
 
 services:
@@ -44,6 +45,9 @@ services:
     ports:
       - '8080:8080'
     volumes:
+      # ✅ This line ensures persistent data
+      - keycloak_data:/opt/keycloak/data
+      # ✅ This line allows initial import of your realm file
       - ./compose/local/keycloak/realm-export:/opt/keycloak/data/import
 
 
