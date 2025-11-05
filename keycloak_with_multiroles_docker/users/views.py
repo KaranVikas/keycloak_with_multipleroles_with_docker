@@ -13,7 +13,7 @@ class KeycloakConfigView(APIView):
 
   def get(self, request):
     return Response({
-      'serverUrl': settings.KEYCLOAK_SERVER_URL,
+      'serverUrl': settings.KEYCLOAK_SERVER,
       'realm': settings.KEYCLOAK_REALM,
       'clientId': settings.KEYCLOAK_CLIENT_ID,
     }, status=status.HTTP_200_OK

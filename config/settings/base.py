@@ -1,7 +1,6 @@
 # ruff: noqa: ERA001, E501
 """Base settings to build other settings files upon."""
 
-
 from pathlib import Path
 
 import environ
@@ -13,8 +12,8 @@ env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
-    # OS environment variables take precedence over variables from .env
-    env.read_env(str(BASE_DIR / ".env"))
+  # OS environment variables take precedence over variables from .env
+  env.read_env(str(BASE_DIR / ".env"))
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -61,32 +60,32 @@ WSGI_APPLICATION = "config.wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.sites",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    # "django.contrib.humanize", # Handy template tags
-    "django.contrib.admin",
-    "django.forms",
+  "django.contrib.auth",
+  "django.contrib.contenttypes",
+  "django.contrib.sessions",
+  "django.contrib.sites",
+  "django.contrib.messages",
+  "django.contrib.staticfiles",
+  # "django.contrib.humanize", # Handy template tags
+  "django.contrib.admin",
+  "django.forms",
 ]
 THIRD_PARTY_APPS = [
-    "crispy_forms",
-    "crispy_bootstrap5",
-    "allauth",
-    "allauth.account",
-    "allauth.mfa",
-    "allauth.socialaccount",
-    "rest_framework",
-    "rest_framework.authtoken",
-    "corsheaders",
-    "drf_spectacular",
+  "crispy_forms",
+  "crispy_bootstrap5",
+  "allauth",
+  "allauth.account",
+  "allauth.mfa",
+  "allauth.socialaccount",
+  "rest_framework",
+  "rest_framework.authtoken",
+  "corsheaders",
+  "drf_spectacular",
 ]
 
 LOCAL_APPS = [
-    "keycloak_with_multiroles_docker.users",
-    # Your stuff: custom apps go here
+  "keycloak_with_multiroles_docker.users",
+  # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -100,8 +99,8 @@ MIGRATION_MODULES = {"sites": "keycloak_with_multiroles_docker.contrib.sites.mig
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+  "django.contrib.auth.backends.ModelBackend",
+  "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
@@ -114,20 +113,20 @@ LOGIN_URL = "account_login"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
 PASSWORD_HASHERS = [
-    # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+  # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
+  "django.contrib.auth.hashers.Argon2PasswordHasher",
+  "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+  "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+  "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+  {
+    "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+  },
+  {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+  {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+  {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -136,19 +135,18 @@ CORS_ALLOW_CREDENTIALS = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
+  "corsheaders.middleware.CorsMiddleware",
+  "django.middleware.security.SecurityMiddleware",
+  "django.contrib.sessions.middleware.SessionMiddleware",
+  "django.middleware.locale.LocaleMiddleware",
+  "django.middleware.common.CommonMiddleware",
+  "django.middleware.csrf.CsrfViewMiddleware",
+  "django.contrib.auth.middleware.AuthenticationMiddleware",
+  "django.contrib.messages.middleware.MessageMiddleware",
+  "django.middleware.clickjacking.XFrameOptionsMiddleware",
+  "allauth.account.middleware.AccountMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 # STATIC
 # ------------------------------------------------------------------------------
@@ -160,8 +158,8 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(APPS_DIR / "static")]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+  "django.contrib.staticfiles.finders.FileSystemFinder",
+  "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
 # MEDIA
@@ -175,28 +173,28 @@ MEDIA_URL = "/media/"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
-    {
-        # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        # https://docs.djangoproject.com/en/dev/ref/settings/#dirs
-        "DIRS": [str(APPS_DIR / "templates")],
-        # https://docs.djangoproject.com/en/dev/ref/settings/#app-dirs
-        "APP_DIRS": True,
-        "OPTIONS": {
-            # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.template.context_processors.i18n",
-                "django.template.context_processors.media",
-                "django.template.context_processors.static",
-                "django.template.context_processors.tz",
-                "django.contrib.messages.context_processors.messages",
-                "keycloak_with_multiroles_docker.users.context_processors.allauth_settings",
-            ],
-        },
+  {
+    # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
+    "BACKEND": "django.template.backends.django.DjangoTemplates",
+    # https://docs.djangoproject.com/en/dev/ref/settings/#dirs
+    "DIRS": [str(APPS_DIR / "templates")],
+    # https://docs.djangoproject.com/en/dev/ref/settings/#app-dirs
+    "APP_DIRS": True,
+    "OPTIONS": {
+      # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
+      "context_processors": [
+        "django.template.context_processors.debug",
+        "django.template.context_processors.request",
+        "django.contrib.auth.context_processors.auth",
+        "django.template.context_processors.i18n",
+        "django.template.context_processors.media",
+        "django.template.context_processors.static",
+        "django.template.context_processors.tz",
+        "django.contrib.messages.context_processors.messages",
+        "keycloak_with_multiroles_docker.users.context_processors.allauth_settings",
+      ],
     },
+  },
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
@@ -224,8 +222,8 @@ X_FRAME_OPTIONS = "DENY"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND",
-    default="django.core.mail.backends.smtp.EmailBackend",
+  "DJANGO_EMAIL_BACKEND",
+  default="django.core.mail.backends.smtp.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
@@ -248,26 +246,25 @@ DJANGO_ADMIN_FORCE_ALLAUTH = env.bool("DJANGO_ADMIN_FORCE_ALLAUTH", default=Fals
 # See https://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
-        },
+  "version": 1,
+  "disable_existing_loggers": False,
+  "formatters": {
+    "verbose": {
+      "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
     },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        },
+  },
+  "handlers": {
+    "console": {
+      "level": "DEBUG",
+      "class": "logging.StreamHandler",
+      "formatter": "verbose",
     },
-    "root": {"level": "INFO", "handlers": ["console"]},
+  },
+  "root": {"level": "INFO", "handlers": ["console"]},
 }
 
 REDIS_URL = env("REDIS_URL", default="redis://redis:6379/0")
 REDIS_SSL = REDIS_URL.startswith("rediss://")
-
 
 # django-allauth
 # ------------------------------------------------------------------------------
@@ -291,13 +288,13 @@ SOCIALACCOUNT_FORMS = {"signup": "keycloak_with_multiroles_docker.users.forms.Us
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "keycloak_with_multiroles_docker.auth_keycloak.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+  "DEFAULT_AUTHENTICATION_CLASSES": (
+    "keycloak_with_multiroles_docker.auth_keycloak.authentication.JWTAuthentication",
+    # "rest_framework.authentication.SessionAuthentication",
+    "rest_framework.authentication.TokenAuthentication",
+  ),
+  "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+  "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -306,11 +303,11 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "kc_roles_docker API",
-    "DESCRIPTION": "Documentation of API endpoints of kc_roles_docker",
-    "VERSION": "1.0.0",
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
-    "SCHEMA_PATH_PREFIX": "/api/",
+  "TITLE": "kc_roles_docker API",
+  "DESCRIPTION": "Documentation of API endpoints of kc_roles_docker",
+  "VERSION": "1.0.0",
+  "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+  "SCHEMA_PATH_PREFIX": "/api/",
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
@@ -326,11 +323,12 @@ KEYCLOAK_LEEWAY = env.int("KEYCLOAK_LEEWAY", default=60)
 KEYCLOAK_AUDIENCE = env.str("KEYCLOAK_AUDIENCE", default="todo")
 
 # Use environment variables directly - don't override them
-KEYCLOAK_JWKS_URL = env.str("KEYCLOAK_JWKS_URL", default=f"{KEYCLOAK_SERVER}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/certs")
+KEYCLOAK_JWKS_URL = env.str("KEYCLOAK_JWKS_URL",
+                            default=f"{KEYCLOAK_SERVER}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/certs")
 KEYCLOAK_ISSUER = env.str("KEYCLOAK_ISSUER", default=f"http://localhost:8080/realms/{KEYCLOAK_REALM}")
 
-#add this for keycloak authentication
+# add this for keycloak authentication
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'keycloak_with_multiroles_docker.users.backends.KeycloakBackend',  # Custom backend
+  'django.contrib.auth.backends.ModelBackend',
+  'keycloak_with_multiroles_docker.users.backends.KeycloakBackend',  # Custom backend
 ]
