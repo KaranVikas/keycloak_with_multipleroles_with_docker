@@ -34,3 +34,24 @@ class TokenValidationView(APIView):
       'valid': True,
       'user': UserSerializer(request.user).data
     }, status=status.HTTP_200_OK)
+
+
+class KeycloakSyncUserView(APIView):
+  """
+    Endpoint to sync user from keycloak to Django database
+    Called after user registers/logs in via keycloak
+  """
+
+  permission_classes = [IsAuthenticated]
+
+  def post(self, request):
+    from keycloak_with_multiroles_docker.users.api.serializers import UserSerializer
+
+    user = request.user
+    # User is already created/updated by the authentication backend
+    # just return the user data
+    return Response({
+      'valid': True,
+      'user': UserSerializer(user).data,
+      'message': 'User synced successfully'
+    }, status=status.HTTP_200_OK)
