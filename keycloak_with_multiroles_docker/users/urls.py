@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .api.views import (
-  # RegisterView,
+  RegisterView,
   # LoginView,
   # LogoutView,
   CurrentUserView,
@@ -9,7 +9,7 @@ from .api.views import (
   AllUsersView,
   UserDetailView
 )
-from .views import TokenValidationView, KeycloakConfigView
+from .views import TokenValidationView, KeycloakConfigView, KeycloakSyncUserView
 
 app_name = "users"
 urlpatterns = [
@@ -18,9 +18,9 @@ urlpatterns = [
 
   path('auth/keycloak/config/', KeycloakConfigView.as_view(), name='keycloak_config'),
   path('auth/validate/', TokenValidationView.as_view(), name='keycloak_token_validate'),
-  path('auth/keycloak/sync/', KeycloakConfigView.as_view(), name='keycloak_sync_user'),
+  path('auth/keycloak/sync/', KeycloakSyncUserView.as_view(), name='keycloak_sync_user'),
   #   Existing endpoints
-  # path('register/', RegisterView.as_view(), name='register'),
+  path('register/', RegisterView.as_view(), name='register'),
   # path('login/', LoginView.as_view(), name='login'),
   # path('logout/', LogoutView.as_view(), name='logout'),
   path('me/', CurrentUserView.as_view(), name='current_user'),
