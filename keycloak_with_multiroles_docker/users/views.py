@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import status
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -9,7 +9,7 @@ class KeycloakConfigView(APIView):
   """
       Endpoint to provide keycloak configuration to frontend
   """
-  permission_classes = [AllowAny]
+  permission_classes = []
 
   def get(self, request):
     return Response({

@@ -100,6 +100,7 @@ MIGRATION_MODULES = {"sites": "keycloak_with_multiroles_docker.contrib.sites.mig
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
   "django.contrib.auth.backends.ModelBackend",
+  # 'keycloak_with_multiroles_docker.users.backends.KeycloakBackend',
   "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
@@ -358,9 +359,3 @@ KEYCLOAK_AUDIENCE = env.str("KEYCLOAK_AUDIENCE", default="todo")
 KEYCLOAK_JWKS_URL = env.str("KEYCLOAK_JWKS_URL",
                             default=f"{KEYCLOAK_SERVER}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/certs")
 KEYCLOAK_ISSUER = env.str("KEYCLOAK_ISSUER", default=f"http://localhost:8080/realms/{KEYCLOAK_REALM}")
-
-# add this for keycloak authentication
-AUTHENTICATION_BACKENDS = [
-  'django.contrib.auth.backends.ModelBackend',
-  'keycloak_with_multiroles_docker.users.backends.KeycloakBackend',  # Custom backend
-]
