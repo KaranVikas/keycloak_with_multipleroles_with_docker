@@ -349,7 +349,7 @@ SPECTACULAR_SETTINGS = {
 # Keycloak Configuration
 # ------------------------------------------------------------------------------
 KEYCLOAK_REALM = env.str("KEYCLOAK_REALM", default="education-app")
-KEYCLOAK_SERVER = env.str("KEYCLOAK_SERVER", default="http://keycloak:8080")
+KEYCLOAK_SERVER = env.str("KEYCLOAK_SERVER", default="http://localhost:8080")
 KEYCLOAK_CLIENT_ID = env.str("KEYCLOAK_CLIENT_ID", default="django-education-app")
 KEYCLOAK_CLIENT_SECRET = env.str("KEYCLOAK_CLIENT_SECRET", default="OGXg6wysFDPGEpuhUSnbNI9Bu2TuxMp1")
 KEYCLOAK_LEEWAY = env.int("KEYCLOAK_LEEWAY", default=60)

@@ -41,6 +41,8 @@ class JWTAuthentication(BaseAuthentication):
 
     # Validate and decode token
     payload = self._validate_token(raw_token)
+    logger.info("__________________________________")
+    logger.info(f"Token payload: {payload}")
 
     # Extract user information from token
     keycloak_id = payload.get("sub")
@@ -74,11 +76,15 @@ class JWTAuthentication(BaseAuthentication):
     Validate JWT token with Keycloak JWKS and return decoded payload.
     """
     jwk_client = PyJWKClient(settings.KEYCLOAK_JWKS_URL)
-
+    logger.info(f"JWK Client initialized with URL: {settings.KEYCLOAK_JWKS_URL}")
+    logger.info("got jwk_client", jwk_client)
     try:
+      unverified_header = jwt.get_unverified_header(raw_token)
+      logger.info(f"Token header (kid): {unverified_header.get('kid')}")
+      logger.info("__________________________________")
       logger.info("getting signing key from keycloak")
       signing_key = jwk_client.get_signing_key_from_jwt(raw_token)
-      logger.info("got signing key from keycloak", signing_key.key)
+      logger.info(f"✅ Got signing key from keycloak - Key type: {type(signing_key.key)}")
     except jwt.exceptions.InvalidTokenError as e:
       logger.error(f"❌ Unable to obtain signing key: {e}")
       raise exceptions.AuthenticationFailed(f"Unable to obtain signing key: {e}")
