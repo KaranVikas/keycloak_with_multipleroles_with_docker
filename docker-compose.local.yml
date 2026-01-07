@@ -36,7 +36,7 @@ services:
       - ./.envs/.local/.postgres
 
   keycloak:
-    image: quay.io/keycloak/keycloak:25.0
+    image: quay.io/keycloak/keycloak:26.5
     container_name: keycloak_with_multiroles_docker_local_keycloak
     environment:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
